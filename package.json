@@ -1,5 +1,5 @@
 {
-  "name": "jstorch-lib",
+  "name": "jstorch-node",
   "private": false,
   "license": "MIT",
   "version": "0.0.1",
@@ -11,7 +11,9 @@
     "url": "https://github.com/fullzer4/jsTorch"
   },
   "scripts": {
-    "ci": "",
+    "coverage": "npm run unit -- --coverage-report=html",
+    "test": "npm run unit",
+    "unit": "c8 tap",
     "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=~/Libs/libtorch",
     "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=~/Libs/libtorch"
   },
@@ -19,19 +21,17 @@
     "@types/node": "^20.4.5",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
+    "c8": "^8.0.1",
     "cmake-js": "^7.2.1",
     "eslint": "^8.46.0",
     "node-addon-api": "^7.0.0",
     "node-gyp": "^9.4.0",
+    "tap": "^16.3.8",
     "typescript": "^5.1.6"
   },
   "binary": {
     "napi_versions": [
       3
     ]
-  },
-  "dependencies": {
-    "c8": "^8.0.1",
-    "tap": "^16.3.8"
   }
 }

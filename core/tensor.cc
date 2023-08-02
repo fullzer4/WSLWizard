@@ -17,36 +17,24 @@ Napi::Object TensorBase::Init(Napi::Env env, Napi::Object exports) {
 }
 
 Napi::Object DoubleTensor::Init(Napi::Env env, Napi::Object exports) {
-    Napi::Function func = DefineClass(env, "DoubleTensor", {
-        InstanceMethod("data", &DoubleTensor::data)
-    });
-
-    Napi::FunctionReference* constructor = new Napi::FunctionReference();
-    *constructor = Napi::Persistent(func);
+    Napi::Function func = DefineClass(env, "DoubleTensor", {});
+    constructor = Napi::Persistent(func);
     exports.Set("DoubleTensor", func);
 
     return exports;
 }
 
 Napi::Object FloatTensor::Init(Napi::Env env, Napi::Object exports) {
-    Napi::Function func = DefineClass(env, "FloatTensor", {
-        InstanceMethod("getData", &FloatTensor::data)
-    });
-
-    Napi::FunctionReference* constructor = new Napi::FunctionReference();
-    *constructor = Napi::Persistent(func);
+    Napi::Function func = DefineClass(env, "FloatTensor", {});
+    constructor = Napi::Persistent(func);
     exports.Set("FloatTensor", func);
 
     return exports;
 }
 
 Napi::Object HalfTensor::Init(Napi::Env env, Napi::Object exports) {
-    Napi::Function func = DefineClass(env, "HalfTensor", {
-        InstanceMethod("getData", &HalfTensor::data)
-    });
-
-    Napi::FunctionReference* constructor = new Napi::FunctionReference();
-    *constructor = Napi::Persistent(func);
+    Napi::Function func = DefineClass(env, "HalfTensor", {});
+    constructor = Napi::Persistent(func);
     exports.Set("HalfTensor", func);
 
     return exports;
@@ -59,11 +47,11 @@ DoubleTensor::DoubleTensor(const Napi::CallbackInfo& info) : TensorBase(info) {
     }
 
     Napi::Array dataArray = info[0].As<Napi::Array>();
-    size_t dataLength = dataArray.Length();
+    int64_t dataLength = dataArray.Length();
     std::vector<double> data;
     data.reserve(dataLength);
 
-    for (size_t i = 0; i < dataLength; i++) {
+    for (int64_t i = 0; i < dataLength; i++) {
         data.push_back(dataArray.Get(i).ToNumber().DoubleValue());
     }
 
@@ -77,11 +65,11 @@ FloatTensor::FloatTensor(const Napi::CallbackInfo& info) : TensorBase(info) {
     }
 
     Napi::Array dataArray = info[0].As<Napi::Array>();
-    size_t dataLength = dataArray.Length();
+    int64_t dataLength = dataArray.Length();
     std::vector<float> data;
     data.reserve(dataLength);
 
-    for (size_t i = 0; i < dataLength; i++) {
+    for (int64_t i = 0; i < dataLength; i++) {
         data.push_back(static_cast<float>(dataArray.Get(i).ToNumber().DoubleValue()));
     }
 
@@ -95,48 +83,37 @@ HalfTensor::HalfTensor(const Napi::CallbackInfo& info) : TensorBase(info) {
     }
 
     Napi::Array dataArray = info[0].As<Napi::Array>();
-    size_t dataLength = dataArray.Length();
+    int64_t dataLength = dataArray.Length();
     std::vector<at::Half> data;
     data.reserve(dataLength);
 
-    for (size_t i = 0; i < dataLength; i++) {
+    for (int64_t i = 0; i < dataLength; i++) {
         data.push_back(static_cast<at::Half>(dataArray.Get(i).ToNumber().DoubleValue()));
     }
 
     _value = torch::from_blob(data.data(), {dataLength}, torch::kHalf);
 }
 
-// botar isso em /tensor
-
 Napi::Value DoubleTensor::data(const Napi::CallbackInfo& info) {
-    std::vector<double> data(_value.data<double>(), _value.data<double>() + _value.numel());
-    Napi::Array dataArray = Napi::Array::New(info.Env(), data.size());
-
-    for (size_t i = 0; i < data.size(); i++) {
-        dataArray.Set(i, data[i]);
+    Napi::Array dataArr = Napi::Array::New(info.Env(), _value.numel());
+    for (int i = 0; i < _value.numel(); i++) {
+        dataArr.Set(i, Napi::Number::New(info.Env(), _value[i].item<double>()));
     }
-
-    return dataArray;
+    return dataArr;
 }
 
 Napi::Value FloatTensor::data(const Napi::CallbackInfo& info) {
-    std::vector<float> data(_value.data<float>(), _value.data<float>() + _value.numel());
-    Napi::Array dataArray = Napi::Array::New(info.Env(), data.size());
-
-    for (size_t i = 0; i < data.size(); i++) {
-        dataArray.Set(i, static_cast<double>(data[i]));
+    Napi::Array dataArr = Napi::Array::New(info.Env(), _value.numel());
+    for (int i = 0; i < _value.numel(); i++) {
+        dataArr.Set(i, Napi::Number::New(info.Env(), _value[i].item<float>()));
     }
-
-    return dataArray;
+    return dataArr;
 }
 
 Napi::Value HalfTensor::data(const Napi::CallbackInfo& info) {
-    std::vector<at::Half> data(_value.data<at::Half>(), _value.data<at::Half>() + _value.numel());
-    Napi::Array dataArray = Napi::Array::New(info.Env(), data.size());
-
-    for (size_t i = 0; i < data.size(); i++) {
-        dataArray.Set(i, static_cast<double>(data[i]));
+    Napi::Array dataArr = Napi::Array::New(info.Env(), _value.numel());
+    for (int i = 0; i < _value.numel(); i++) {
+        dataArr.Set(i, Napi::Number::New(info.Env(), static_cast<double>(_value[i].item<at::Half>())));
     }
-
-    return dataArray;
+    return dataArr;
 }
