@@ -1,6 +1,6 @@
 
-import Tensor from './lib/tensor'
-import Types from './lib/types'
+import Tensor from './lib/tensor.js'
+import Types from './lib/types.js'
 
 class Functions {
 	constructor() {
