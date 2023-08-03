@@ -2,7 +2,7 @@
   "name": "jstorch-node",
   "private": false,
   "license": "MIT",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "type": "module",
   "types": "./types/provider.d.ts",
   "author": {
@@ -34,5 +34,10 @@
     "napi_versions": [
       3
     ]
+  },
+  "exports": {
+    ".": {
+      "import": "./index.js"
+    }
   }
 }
