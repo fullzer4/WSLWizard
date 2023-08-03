@@ -2,7 +2,7 @@
   "name": "jstorch-node",
   "private": false,
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.21",
   "type": "module",
   "types": "./types/provider.d.ts",
   "author": {
@@ -22,12 +22,13 @@
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "c8": "^8.0.1",
-    "cmake-js": "^7.2.1",
     "eslint": "^8.46.0",
-    "node-addon-api": "^7.0.0",
-    "node-gyp": "^9.4.0",
     "tap": "^16.3.8",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "cmake-js": "^7.2.1",
+    "node-addon-api": "^7.0.0"
   },
   "binary": {
     "napi_versions": [

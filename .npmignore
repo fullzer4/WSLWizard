@@ -1,0 +1,9 @@
+coverage
+imgs
+test
+.editorconfig
+.eslintrc.cjs
+.github
+.gitattributes
+.gitignore
+.taprc
