@@ -4,11 +4,12 @@
 #include <torch/torch.h>
 
 class ShortTensor : public Napi::ObjectWrap<ShortTensor> {
-public:
-    static Napi::Object Init(Napi::Env env, Napi::Object exports);
-    ShortTensor(const Napi::CallbackInfo& info);
-    Napi::Value GetTensor(const Napi::CallbackInfo& info);
+    public:
+        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+        ShortTensor(const Napi::CallbackInfo &);
 
-private:
-    torch::Tensor tensor;
+    private:
+        static Napi::FunctionReference constructor;
+
+        Napi::Value data(const Napi::CallbackInfo &);
 };

@@ -1,12 +1,16 @@
 #include "BFloat16Tensor.h"
 
+Napi::FunctionReference BFloat16Tensor::constructor;
+
 Napi::Object BFloat16Tensor::Init(Napi::Env env, Napi::Object exports) {
     Napi::Function func = DefineClass(env, "BFloat16Tensor", {
-        InstanceMethod("getTensor", &BFloat16Tensor::GetTensor)
+        InstanceMethod("data", &BFloat16Tensor::data),
     });
+
     constructor = Napi::Persistent(func);
     constructor.SuppressDestruct();
     exports.Set("BFloat16Tensor", func);
+
     return exports;
 }
 
@@ -14,6 +18,7 @@ BFloat16Tensor::BFloat16Tensor(const Napi::CallbackInfo& info) : Napi::ObjectWra
     // Construir o tensor aqui com base nos argumentos passados para o construtor (se houver)
 }
 
-Napi::Value BFloat16Tensor::GetTensor(const Napi::CallbackInfo& info) {
-    // Implementar a lógica para retornar o tensor como um valor Napi aqui
+Napi::Value BFloat16Tensor::data(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    return Napi::Number::New(env, 42); // Teste
 }

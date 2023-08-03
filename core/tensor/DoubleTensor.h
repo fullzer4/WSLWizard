@@ -4,11 +4,12 @@
 #include <torch/torch.h>
 
 class DoubleTensor : public Napi::ObjectWrap<DoubleTensor> {
-public:
-    static Napi::Object Init(Napi::Env env, Napi::Object exports);
-    DoubleTensor(const Napi::CallbackInfo& info);
-    Napi::Value GetTensor(const Napi::CallbackInfo& info);
+    public:
+        static Napi::Object Init(Napi::Env env, Napi::Object exports);
+        DoubleTensor(const Napi::CallbackInfo &);
 
-private:
-    torch::Tensor tensor;
+    private:
+        static Napi::FunctionReference constructor;
+
+        Napi::Value data(const Napi::CallbackInfo &);
 };

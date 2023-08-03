@@ -1,12 +1,16 @@
 #include "BoolTensor.h"
 
+Napi::FunctionReference BoolTensor::constructor;
+
 Napi::Object BoolTensor::Init(Napi::Env env, Napi::Object exports) {
     Napi::Function func = DefineClass(env, "BoolTensor", {
-        InstanceMethod("getTensor", &BoolTensor::GetTensor)
+        InstanceMethod("data", &BoolTensor::data),
     });
+
     constructor = Napi::Persistent(func);
     constructor.SuppressDestruct();
     exports.Set("BoolTensor", func);
+
     return exports;
 }
 
@@ -14,6 +18,7 @@ BoolTensor::BoolTensor(const Napi::CallbackInfo& info) : Napi::ObjectWrap<BoolTe
     // Construir o tensor aqui com base nos argumentos passados para o construtor (se houver)
 }
 
-Napi::Value BoolTensor::GetTensor(const Napi::CallbackInfo& info) {
-    // Implementar a lógica para retornar o tensor como um valor Napi aqui
+Napi::Value BoolTensor::data(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    return Napi::Number::New(env, 42); // Teste
 }

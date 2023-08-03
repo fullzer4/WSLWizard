@@ -1,2 +1,2 @@
-import core from "./lib/addon.cjs"
+import Tensor from "./lib/tensor"
 
