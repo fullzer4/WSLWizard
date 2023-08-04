@@ -5,4 +5,4 @@ check-coverage: false
 coverage: false
 
 files:
-  - 'test/**/*.test.js'
+  - 'test/*.test.js'
