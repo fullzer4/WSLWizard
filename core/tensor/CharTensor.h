@@ -10,6 +10,7 @@ class CharTensor : public Napi::ObjectWrap<CharTensor> {
 
     private:
         static Napi::FunctionReference constructor;
+        torch::Tensor tensor_;
 
         Napi::Value data(const Napi::CallbackInfo &);
 };

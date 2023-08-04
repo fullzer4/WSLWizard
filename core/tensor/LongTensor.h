@@ -10,6 +10,7 @@ class LongTensor : public Napi::ObjectWrap<LongTensor> {
 
     private:
         static Napi::FunctionReference constructor;
+        torch::Tensor tensor_;
 
         Napi::Value data(const Napi::CallbackInfo &);
 };

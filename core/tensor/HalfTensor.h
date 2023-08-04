@@ -10,6 +10,7 @@ class HalfTensor : public Napi::ObjectWrap<HalfTensor> {
 
     private:
         static Napi::FunctionReference constructor;
-
+        torch::Tensor tensor_;
+        
         Napi::Value data(const Napi::CallbackInfo &);
 };

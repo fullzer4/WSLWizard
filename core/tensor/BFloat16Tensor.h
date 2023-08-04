@@ -10,6 +10,7 @@ class BFloat16Tensor : public Napi::ObjectWrap<BFloat16Tensor> {
 
     private:
         static Napi::FunctionReference constructor;
+        torch::Tensor tensor_;
 
         Napi::Value data(const Napi::CallbackInfo &);
 };

@@ -10,6 +10,7 @@ class ByteTensor : public Napi::ObjectWrap<ByteTensor> {
 
     private:
         static Napi::FunctionReference constructor;
+        torch::Tensor tensor_;
 
         Napi::Value data(const Napi::CallbackInfo &);
 };

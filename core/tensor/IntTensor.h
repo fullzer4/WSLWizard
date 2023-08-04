@@ -10,6 +10,7 @@ class IntTensor : public Napi::ObjectWrap<IntTensor> {
 
     private:
         static Napi::FunctionReference constructor;
-
+        torch::Tensor tensor_;
+        
         Napi::Value data(const Napi::CallbackInfo &);
 };
