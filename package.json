@@ -12,7 +12,7 @@
   },
   "scripts": {
     "coverage": "npm run unit -- --coverage-report=html",
-    "test": "npm run unit",
+    "test": "tap",
     "unit": "c8 tap",
     "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=~/Libs/libtorch",
     "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=~/Libs/libtorch",
