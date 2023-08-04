@@ -14,7 +14,7 @@ test('Teste de criação de tensor', (t) => {
 
 	const result = myTensor.data()
 
-	t.equal(42, result, `Comparacao de resultado ${result}`) // mudar para um teste valido depois
+	t.equal(42, result, `Comparacao de resultado`) // mudar para um teste valido depois
     
 	t.end()
 })
