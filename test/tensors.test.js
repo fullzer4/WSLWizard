@@ -4,9 +4,8 @@
 import jsTorch from '../index.js'
 
 import t from 'tap'
-const test = t.test
 
-test('Teste de criação de tensor', (t) => {
+t.test('Teste de criação de tensor', (t) => {
 	const data = [[0.11111, 0.222222, 0.3333333]]
 	const dtype = jsTorch.Double
   
