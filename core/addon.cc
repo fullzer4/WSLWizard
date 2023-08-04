@@ -1,16 +1,6 @@
 #include <napi.h>
 
-// tensors
-#include "tensor/BFloat16Tensor.h"
-#include "tensor/BoolTensor.h"
-#include "tensor/ByteTensor.h"
-#include "tensor/CharTensor.h"
-#include "tensor/DoubleTensor.h"
-#include "tensor/FloatTensor.h"
-#include "tensor/HalfTensor.h"
-#include "tensor/IntTensor.h"
-#include "tensor/LongTensor.h"
-#include "tensor/ShortTensor.h"
+#include "tensor/tensors.h"
 
 Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
     // tensors
