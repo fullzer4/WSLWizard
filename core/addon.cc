@@ -1,6 +1,7 @@
 #include <napi.h>
 
 #include "tensor/tensors.h"
+#include "cuda/cuda.h"
 
 Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
     // tensors
@@ -15,6 +16,9 @@ Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
     LongTensor::Init(env, exports);
     DoubleTensor::Init(env, exports);
     ShortTensor::Init(env, exports);
+
+    // cuda
+    exports.Set(Napi::String::New(env, "isCudaAvailable"), Napi::Function::New(env, IsCudaAvailable));
 
     return exports;
 }
