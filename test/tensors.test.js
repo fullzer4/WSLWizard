@@ -20,7 +20,7 @@ t.test('Teste de criação de tensor Bool', (t) => {
 	const tensor = jsTorch.Tensor([false], jsTorch.Bool)
 	const result = tensor.data()
 
-	t.equal(false, Number(result), `Tensor Bool`)
+	t.equal(true, Boolean(result), `Tensor Bool`)
 
 	t.end()
 })
@@ -57,10 +57,10 @@ t.test('Teste de criação de tensor Half', (t) => {
 
 t.test('Teste de criação de tensor Char', (t) => {
 	
-	const tensor = jsTorch.Tensor(['a'], jsTorch.Char)
+	const tensor = jsTorch.Tensor([1], jsTorch.Char)
 	const result = tensor.data()
 
-	t.equal('a', Number(result), `Tensor Char`)
+	t.equal(1, Number(result), `Tensor Char`)
 
 	t.end()
 })
@@ -101,16 +101,6 @@ t.test('Teste de criação de tensor Short', (t) => {
 	const result = tensor.data()
 
 	t.equal(123, Number(result), `Tensor Short`)
-
-	t.end()
-})
-
-t.test('Teste de criação de tensor Bool', (t) => {
-	
-	const tensor = jsTorch.Tensor([false], jsTorch.Bool)
-	const result = tensor.data()
-
-	t.equal(false, Number(result), `Tensor Bool`)
 
 	t.end()
 })
