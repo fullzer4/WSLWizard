@@ -4,7 +4,7 @@
 #include "cuda/cuda.h"
 
 Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
-    // tensors
+
     BFloat16Tensor::Init(env, exports);
     BoolTensor::Init(env, exports);
     ByteTensor::Init(env, exports);
@@ -17,8 +17,7 @@ Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
     DoubleTensor::Init(env, exports);
     ShortTensor::Init(env, exports);
 
-    // cuda
-    exports.Set(Napi::String::New(env, "isCudaAvailable"), Napi::Function::New(env, IsCudaAvailable));
+    Cuda::Init(env, exports);
 
     return exports;
 }

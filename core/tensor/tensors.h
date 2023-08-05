@@ -1,6 +1,3 @@
-#ifndef TENSOR_CLASSES_H
-#define TENSOR_CLASSES_H
-
 #include <torch/torch.h>
 #include <napi.h>
 
@@ -25,5 +22,3 @@ TENSOR_CLASS(IntTensor, torch::kInt32, int32_t)
 TENSOR_CLASS(ByteTensor, torch::kUInt8, uint8_t)
 TENSOR_CLASS(LongTensor, torch::kInt64, int64_t)
 TENSOR_CLASS(ShortTensor, torch::kInt16, int16_t)
-
-#endif
