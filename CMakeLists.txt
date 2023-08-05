@@ -4,7 +4,7 @@ project (jstorch)
 find_package(Torch REQUIRED)
 
 include_directories(${CMAKE_JS_INC})
-file(GLOB SOURCE_FILES "core/*.cc" "core/*.h" "core/tensor/*.cc" "core/tensor/*.h" "core/cuda/*.cc" "core/cuda/*.h")
+file(GLOB SOURCE_FILES "core/*.cc" "core/*.h" "core/tensor/*.cc" "core/tensor/*.h" "core/cuda/*.cc" "core/cuda/*.h" "core/nn/*.cc" "core/nn/*.h")
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
