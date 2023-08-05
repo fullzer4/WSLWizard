@@ -1,6 +1,6 @@
 #include "tensors.h"
 
-#define TENSOR_CLASS(NAME, TORCH_TYPE, NAPI_TYPE) \
+#define TENSOR_CLASS_H(NAME, TORCH_TYPE, NAPI_TYPE) \
 Napi::FunctionReference NAME::constructor; \
 \
 Napi::Object NAME::Init(Napi::Env env, Napi::Object exports) { \
@@ -37,13 +37,13 @@ Napi::Value NAME::data(const Napi::CallbackInfo& info) { \
     return dataArray; \
 }
 
-TENSOR_CLASS(BFloat16Tensor, torch::kBFloat16, float)
-TENSOR_CLASS(BoolTensor, torch::kBool, bool)
-TENSOR_CLASS(FloatTensor, torch::kFloat32, float)
-TENSOR_CLASS(DoubleTensor, torch::kFloat64, double)
-TENSOR_CLASS(HalfTensor, torch::kFloat16, float)
-TENSOR_CLASS(CharTensor, torch::kInt8, int8_t)
-TENSOR_CLASS(IntTensor, torch::kInt32, int32_t)
-TENSOR_CLASS(ByteTensor, torch::kUInt8, uint8_t)
-TENSOR_CLASS(LongTensor, torch::kInt64, int64_t)
-TENSOR_CLASS(ShortTensor, torch::kInt16, int16_t)
+TENSOR_CLASS_H(BFloat16Tensor, torch::kBFloat16, float)
+TENSOR_CLASS_H(BoolTensor, torch::kBool, bool)
+TENSOR_CLASS_H(FloatTensor, torch::kFloat32, float)
+TENSOR_CLASS_H(DoubleTensor, torch::kFloat64, double)
+TENSOR_CLASS_H(HalfTensor, torch::kFloat16, float)
+TENSOR_CLASS_H(CharTensor, torch::kInt8, int8_t)
+TENSOR_CLASS_H(IntTensor, torch::kInt32, int32_t)
+TENSOR_CLASS_H(ByteTensor, torch::kUInt8, uint8_t)
+TENSOR_CLASS_H(LongTensor, torch::kInt64, int64_t)
+TENSOR_CLASS_H(ShortTensor, torch::kInt16, int16_t)

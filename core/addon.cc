@@ -2,9 +2,7 @@
 
 #include "tensor/tensors.h"
 #include "cuda/cuda.h"
-#include "nn/nn.h"
-#include "nn/conv2d.h"
-#include "nn/linear.h"
+#include "nn/load.h"
 
 Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
 
@@ -22,9 +20,7 @@ Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
 
     Cuda::Init(env, exports);
 
-    NN::Init(env, exports);
-    Conv2d::Init(env, exports);
-    Linear::Init(env, exports);
+    exports.Set(Napi::String::New(env, "load"), Napi::Function::New(env, LoadModel));
 
     return exports;
 }
