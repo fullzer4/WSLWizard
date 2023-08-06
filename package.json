@@ -14,9 +14,9 @@
     "coverage": "npm run unit -- --coverage-report=html",
     "test": "tap",
     "unit": "c8 tap",
-    "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=~/Libs/libtorch",
-    "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=~/Libs/libtorch",
-    "build:package": "npm run compile && mv build/Release/jstorch.node lib/"
+    "compile": "node-gyp configure build",
+    "rebuild": "node-gyp clean configure build",
+    "build:package": "npm run compile && node-pre-gyp package"
   },
   "devDependencies": {
     "@types/node": "^20.4.5",
@@ -24,11 +24,12 @@
     "@typescript-eslint/parser": "^6.2.1",
     "c8": "^8.0.1",
     "eslint": "^8.46.0",
-    "typescript": "^5.1.6",
-    "tap": "^16.3.8"
+    "node-gyp": "^9.4.0",
+    "node-pre-gyp": "^0.17.0",
+    "tap": "^16.3.8",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "cmake-js": "^7.2.1",
     "node-addon-api": "^7.0.0"
   },
   "binary": {
