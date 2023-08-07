@@ -14,7 +14,7 @@ Napi::Object NAME::Init(Napi::Env env, Napi::Object exports) { \
 NAME::NAME(const Napi::CallbackInfo& info) : Napi::ObjectWrap<NAME>(info) { \
     Napi::Env env = info.Env(); \
     if (info.Length() == 0 || !info[0].IsArray()) { \
-        Napi::TypeError::New(env, "Um array é esperado como argumento").ThrowAsJavaScriptException(); \
+        Napi::TypeError::New(env, "Array was expected").ThrowAsJavaScriptException(); \
         return; \
     } \
     Napi::Array dataArray = info[0].As<Napi::Array>(); \
