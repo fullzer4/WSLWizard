@@ -15,9 +15,9 @@ jobs:
 
     - name: Configs
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          choco install make
-        fi
+        if ($env:RUNNER_OS -eq "Windows") {
+        choco install make
+        }
 
     - name: Tests
       run: |
