@@ -1,6 +1,8 @@
 
 import Tensor from './lib/tensor.js'
 import Types from './lib/types.js'
+import Core from './lib/addon.cjs'
+import Cuda from './lib/cuda.js'
 
 class Functions {
 	constructor() {
@@ -18,9 +20,17 @@ class Functions {
 		this.Int = Types.Int
 		this.Long = Types.Long
 		this.Short = Types.Short
+
+		// NN - neural networks module
+		this.load = Core.load
+
+		// Cudas - gpu module
+		this.cuda = Cuda()
 	}
 }
 
 const jsTorch = new Functions()
+
+console.log(`${jsTorch.cuda.is_avaliable()}`)
 
 export default jsTorch
