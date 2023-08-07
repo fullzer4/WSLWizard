@@ -1,9 +1,9 @@
 import os from 'os'
 
-export const platform = os.platform()
+const platform = os.platform()
 export const arch = os.arch()
 
-let platformName
+export let platformName
 
 switch (platform) {
 case 'darwin':
