@@ -11,8 +11,7 @@
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")",
         "<(module_root_dir)/node_modules/node-addon-api",
-        "<(module_root_dir)/node_modules/node-addon-api/src",
-        "~/Libs/libtorch"
+        "<(module_root_dir)/node_modules/node-addon-api/src"
       ],
       "dependencies": [
         "<!(node -p \"require('node-addon-api').gyp\")"
@@ -29,7 +28,7 @@
           "-lm",
           "-ldl",
           "-pthread",
-          "~/Libs/libtorch/"
+          "~/Libs/libtorch/include/torch"
         ]
       }
     }
