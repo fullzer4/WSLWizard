@@ -13,12 +13,6 @@ jobs:
     - name: Checkout do repositório
       uses: actions/checkout@v2
 
-    - name: Configs
-      run: |
-        if ($env:RUNNER_OS -eq "Windows") {
-        choco install make
-        }
-
     - name: Tests
       run: |
         # botar os testes
