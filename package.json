@@ -2,7 +2,7 @@
   "name": "jstorch-node",
   "private": false,
   "license": "MIT",
-  "version": "0.0.24",
+  "version": "0.0.26",
   "type": "module",
   "types": "./types/provider.d.ts",
   "author": {
@@ -16,7 +16,7 @@
     "unit": "c8 tap",
     "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=core/libtorch",
     "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=core/libtorch",
-    "build": "node config/install.cjs",
+    "postinstall": "node config/install.cjs",
     "build:package": "npm run compile && mv build/Release/jstorch.node lib/"
   },
   "devDependencies": {

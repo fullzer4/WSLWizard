@@ -2,6 +2,8 @@ coverage
 imgs
 test
 docs
+build
+libtorch
 .editorconfig
 .eslintrc.cjs
 .github
