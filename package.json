@@ -14,8 +14,8 @@
     "coverage": "npm run unit -- --coverage-report=html",
     "test": "tap",
     "unit": "c8 tap",
-    "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=lib/libtorch",
-    "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=lib/libtorch",
+    "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=core/libtorch/",
+    "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=c0re/libtorch/",
     "build": "node config/install.cjs",
     "build:package": "npm run compile && mv build/Release/jstorch.node lib/"
   },

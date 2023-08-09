@@ -1,8 +1,6 @@
 coverage
 imgs
 test
-core
-build
 docs
 .editorconfig
 .eslintrc.cjs

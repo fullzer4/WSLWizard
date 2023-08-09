@@ -3,9 +3,9 @@ const https = require('https')
 const fs = require('fs')
 const unzipper = require('unzipper')
 
-const url = 'https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip'
+const url = 'https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.0.1%2Bcpu.zip'
 const downloadPath = 'libtorch-shared-with-deps-latest.zip'
-const extractionPath = 'lib'
+const extractionPath = 'core'
 
 function downloadFile(url, downloadPath, callback) {
 	const file = fs.createWriteStream(downloadPath)
