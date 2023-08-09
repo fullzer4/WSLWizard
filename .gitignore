@@ -3,3 +3,4 @@ node_modules
 libtorch
 .vscode
 coverage
+lib/jstorch.node

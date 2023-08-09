@@ -31,6 +31,4 @@ class Functions {
 
 const jsTorch = new Functions()
 
-console.log(`${jsTorch.cuda.is_avaliable()}`)
-
 export default jsTorch
