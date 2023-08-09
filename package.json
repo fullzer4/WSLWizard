@@ -14,8 +14,8 @@
     "coverage": "npm run unit -- --coverage-report=html",
     "test": "tap",
     "unit": "c8 tap",
-    "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=core/libtorch/",
-    "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=c0re/libtorch/",
+    "compile": "cmake-js compile --CDCMAKE_PREFIX_PATH=core/libtorch",
+    "rebuild": "cmake-js rebuild --CDCMAKE_PREFIX_PATH=core/libtorch",
     "build": "node config/install.cjs",
     "build:package": "npm run compile && mv build/Release/jstorch.node lib/"
   },
@@ -30,6 +30,9 @@
     "tap": "^16.3.8",
     "typescript": "^5.1.6"
   },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  },
   "binary": {
     "napi_versions": [
       3
@@ -39,8 +42,5 @@
     ".": {
       "import": "./index.js"
     }
-  },
-  "dependencies": {
-    "unzipper": "^0.10.14"
   }
 }

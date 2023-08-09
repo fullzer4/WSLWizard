@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const https = require('https')
 const fs = require('fs')
-const unzipper = require('unzipper')
+const AdmZip = require('adm-zip')
 
-const url = 'https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.0.1%2Bcpu.zip'
+const url = 'https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.0.1%2Bcpu.zip'
 const downloadPath = 'libtorch-shared-with-deps-latest.zip'
 const extractionPath = 'core'
 
@@ -23,9 +23,9 @@ function downloadFile(url, downloadPath, callback) {
 }
 
 function extractZip(zipPath, extractionPath, callback) {
-	fs.createReadStream(zipPath)
-		.pipe(unzipper.Extract({ path: extractionPath }))
-		.on('close', callback)
+	const zip = new AdmZip(zipPath)
+	zip.extractAllTo(extractionPath, true)
+	if (callback) callback()
 }
 
 downloadFile(url, downloadPath, error => {
@@ -37,7 +37,8 @@ downloadFile(url, downloadPath, error => {
 	console.log('Download complete.')
 
 	extractZip(downloadPath, extractionPath, () => {
-		console.log('Extract with sucess.')
+		console.log('Extract with success.')
+
 		fs.unlink(downloadPath, err => {
 			if (err) {
 				console.error('Error removing ZIP file:', err)
