@@ -15,6 +15,7 @@
     "test": "tap",
     "unit": "c8 tap",
     "configure": "node-gyp configure",
+    "build": "node-gyp build",
     "postinstall": "node config/config.cjs"
   },
   "devDependencies": {
