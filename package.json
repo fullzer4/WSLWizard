@@ -1,45 +1,11 @@
 {
-  "name": "jstorch-node",
-  "private": false,
-  "license": "MIT",
-  "version": "0.0.26",
   "type": "module",
-  "types": "./types/provider.d.ts",
-  "author": {
-    "email": "gabrielpelizzaro@gmail.com",
-    "name": "Gabriel Pelizzaro Pereira",
-    "url": "https://github.com/fullzer4/jsTorch"
-  },
   "scripts": {
-    "coverage": "npm run unit -- --coverage-report=html",
-    "test": "tap",
-    "unit": "c8 tap",
-    "configure": "node-gyp configure",
-    "build": "node-gyp build",
-    "postinstall": "node config/config.cjs"
+    "test": "tap run",
+    "rebuild": "node-gyp rebuild"
   },
   "devDependencies": {
-    "@types/node": "^20.4.5",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
-    "@typescript-eslint/parser": "^6.2.1",
-    "c8": "^8.0.1",
-    "eslint": "^8.46.0",
-    "node-addon-api": "^7.0.0",
-    "node-gyp": "^9.4.0",
-    "tap": "^16.3.8",
-    "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "adm-zip": "^0.5.10"
-  },
-  "binary": {
-    "napi_versions": [
-      3
-    ]
-  },
-  "exports": {
-    ".": {
-      "import": "./index.js"
-    }
+    "node-gyp": "^10.0.1",
+    "tap": "^18.6.1"
   }
 }

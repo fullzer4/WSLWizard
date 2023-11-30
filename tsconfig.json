@@ -1,0 +1,14 @@
+{
+    "include": ["./**/*"],
+    "compilerOptions": {
+      "allowJs": true,
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "declarationMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "bin",
+        "tests"
+    ]
+}
