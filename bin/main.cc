@@ -1,6 +1,6 @@
 #include <node.h>
 
-namespace demo {
+namespace jsTorch {
 
 using v8::FunctionCallbackInfo;
 using v8::Isolate;
@@ -21,4 +21,4 @@ void Initialize(Local<Object> exports) {
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
 
-}  // namespace demo 
+}  // namespace jsTorch 

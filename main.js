@@ -1,9 +1,9 @@
-import addon from "./pkg/main.cjs"
+import addon from './pkg/main.cjs'
 
 export class CjsTorch {
-    constructor() {
-        this.addon = addon
-    }
+	constructor() {
+		this.addon = addon
+	}
 }
 
 const jsTorch = new CjsTorch()
