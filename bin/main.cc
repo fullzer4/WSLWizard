@@ -1,4 +1,5 @@
 #include <node.h>
+#include <torch/torch.h>
 
 namespace jsTorch {
 
