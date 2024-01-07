@@ -1,7 +1,8 @@
 #include <node_api.h>
 #include <torch/torch.h>
 
-#include "tensor.cc"
+#include "tensor/ones.cc"
+#include "tensor/zeros.cc"
 
 namespace jsTorch {
 
@@ -17,7 +18,8 @@ napi_value Initialize(napi_env env, napi_value exports) {
   napi_property_descriptor desc = {"version", nullptr, Version, nullptr, nullptr, nullptr, napi_default, nullptr};
   napi_define_properties(env, exports, 1, &desc);
 
-  Init(env, exports);
+  InitZeros(env, exports);
+  InitOnes(env, exports);
 
   return exports;
 }

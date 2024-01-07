@@ -7,14 +7,15 @@ export class CjsTorch {
 
 	version() { return addon.version() }
 
-	zeros() {
-		
-	}
+	zeros( rows, cols ) { return new addon.zeros(rows, cols) }
+
+	ones( rows, cols ) { return new addon.ones(rows, cols) }
 }
 
 const jsTorch = new CjsTorch()
 
 console.log(jsTorch.version())
-console.log(jsTorch.zeros)
+console.log(jsTorch.zeros(2,3))
+console.log(jsTorch.ones(2,3))
 
 export default jsTorch

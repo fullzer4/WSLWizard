@@ -4,7 +4,12 @@
       "target_name": "addon",
       "sources": [
         "./bin/main.cc",
-        "./bin/tensor.cc"
+        "./bin/tensor/ones.cc",
+        "./bin/tensor/zeros.cc",
+        "./bin/tensor/tensor_utils.cc",
+        "./bin/tensor/tensor_uitls.h",
+        "./bin/tensor/base_tensor.h",
+        "./bin/tensor/int_tensor.h"
       ],
       "include_dirs": [
         "/home/fullzer4/Codes/jstorch-node/libtorch/include/",
