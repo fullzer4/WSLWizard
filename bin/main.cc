@@ -1,25 +1,27 @@
-#include <node.h>
+#include <node_api.h>
 #include <torch/torch.h>
+
+#include "tensor.cc"
 
 namespace jsTorch {
 
-  using v8::FunctionCallbackInfo;
-  using v8::Isolate;
-  using v8::Local;
-  using v8::Object;
-  using v8::String;
-  using v8::Value;
+napi_value Version(napi_env env, napi_callback_info info) {
+  const char* addonVersion = "1.0.0";
 
-  void Method(const FunctionCallbackInfo<Value>& args) {
-    Isolate* isolate = args.GetIsolate();
-    args.GetReturnValue().Set(String::NewFromUtf8(
-        isolate, "world").ToLocalChecked());
-  }
+  napi_value version;
+  napi_create_string_utf8(env, addonVersion, NAPI_AUTO_LENGTH, &version);
+  return version;
+}
 
-  void Initialize(Local<Object> exports) {
-    NODE_SET_METHOD(exports, "hello", Method);
-  }
+napi_value Initialize(napi_env env, napi_value exports) {
+  napi_property_descriptor desc = {"version", nullptr, Version, nullptr, nullptr, nullptr, napi_default, nullptr};
+  napi_define_properties(env, exports, 1, &desc);
 
-  NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
+  Init(env, exports);
 
-}  // namespace jsTorch 
+  return exports;
+}
+
+NAPI_MODULE(jsTorch, Initialize)
+
+}  // namespace jsTorch

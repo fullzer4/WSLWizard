@@ -4,10 +4,17 @@ export class CjsTorch {
 	constructor() {
 		this.addon = addon
 	}
+
+	version() { return addon.version() }
+
+	zeros() {
+		
+	}
 }
 
 const jsTorch = new CjsTorch()
 
-console.log(jsTorch.addon.hello())
+console.log(jsTorch.version())
+console.log(jsTorch.zeros)
 
 export default jsTorch
