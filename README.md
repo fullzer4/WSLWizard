@@ -1,7 +1,7 @@
-<h1>jsTorch-node</h1>
+# Tauri + Solid + Typescript
 
-<div>
+This template should help get you started developing with Tauri, Solid and Typescript in Vite.
 
-</div>
+## Recommended IDE Setup
 
-export LD_LIBRARY_PATH=/home/fullzer4/Codes/jstorch-node/libtorch/lib:$LD_LIBRARY_PATH
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)

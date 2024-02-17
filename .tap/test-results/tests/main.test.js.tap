@@ -1,8 +1,0 @@
-world
-TAP version 14
-# Subtest: Test for import modules
-    ok 1 - this passes
-    1..1
-ok 1 - Test for import modules # time=10.586ms
-
-1..1
