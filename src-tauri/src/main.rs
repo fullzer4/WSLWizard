@@ -3,11 +3,6 @@
 use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTraySubmenu};
 use tauri::Manager;
 
-#[tauri::command]
-fn show_main_window(window: tauri::Window) {
-    window.get_window("main").unwrap().show().unwrap();
-} 
-
 fn main() {
 
     let tray_menu = SystemTrayMenu::new()
@@ -16,8 +11,15 @@ fn main() {
         ))
         .add_item(CustomMenuItem::new("quit".to_string(), "Quit"));
 
-    tauri::Builder::default()
+    tauri::Builder::default().on_window_event(|event| match event.event() {
+        tauri::WindowEvent::CloseRequested { api, .. } => {
+          event.window().hide().unwrap();
+          api.prevent_close();
+        }
+        _ => {}
+        })
         .system_tray(SystemTray::new().with_menu(tray_menu).with_id("tray"))
+        
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::RightClick {
                 position: _,
@@ -32,7 +34,7 @@ fn main() {
                 ..
             } => {
                 let window = app.get_window("main").unwrap();
-                // show_main_window();
+                window.show().unwrap();
                 println!("system tray received a double click");
             }
             SystemTrayEvent::MenuItemClick { id, .. } => {
