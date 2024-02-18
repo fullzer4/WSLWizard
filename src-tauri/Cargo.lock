@@ -3738,7 +3738,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "wslmanager"
+name = "wslwizard"
 version = "0.0.0"
 dependencies = [
  "serde",

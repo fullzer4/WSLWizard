@@ -25,7 +25,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "wslmanager",
+        "title": "wslwizard",
         "width": 800,
         "height": 600,
         "visible": false
@@ -36,8 +36,8 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "com.tauri.dev",
+      "targets": "msi",
+      "identifier": "com.wslwizard.prod",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
