@@ -1,3 +1,3 @@
 <div align="center">
-    <img src="./logo.png">
+    <img src="./logo.png" height="20">
 </div>
