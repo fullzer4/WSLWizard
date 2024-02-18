@@ -5,17 +5,24 @@ use tauri::Manager;
 
 mod wsl;
 use crate::wsl::{
-    list::{list_wsl_distributions},
-    distro_c::open_distro,
+    distro_c::create_wsl_submenu,
+    open::open_distro,
+    close_wsl::close_wsl,
 };
 
 fn main() {
+
+    fn clean_string(input: &str) -> String {
+        input.chars().filter(|&c| c.is_ascii_graphic() || c.is_whitespace()).collect()
+    }
 
     let tray_menu = SystemTrayMenu::new()
         .add_submenu(
             SystemTraySubmenu::new("WSLs", create_wsl_submenu())
         )
-        .add_item(CustomMenuItem::new("quit".to_string(), "Quit"));
+        .add_item(CustomMenuItem::new("open".to_string(), "Open menu"))
+        .add_item(CustomMenuItem::new("quitWSL".to_string(), "Close WSL"))
+        .add_item(CustomMenuItem::new("quit".to_string(), "Close WSLWizard"));
 
     tauri::Builder::default().on_window_event(|event| match event.event() {
         tauri::WindowEvent::CloseRequested { api, .. } => {
@@ -47,10 +54,16 @@ fn main() {
                 "quit" => {
                     std::process::exit(0);
                 }
+                "quitWSL" => {
+                    let _ = close_wsl();
+                }
+                "open" => {
+                    let window = app.get_window("main").unwrap();
+                    window.show().unwrap();
+                }
                 id if id.starts_with("id_") => {
-                    let distro_name = &id[3..];
-                    println!("{}", distro_name);
-                    if let Err(err) = open_distro(distro_name).await {
+                    let distro_name = clean_string(&id[3..]); 
+                    if let Err(err) = open_distro(&distro_name) {
                         println!("Error opening WSL distro: {}", err);
                     }
                 }
@@ -61,24 +74,4 @@ fn main() {
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-}
-
-fn create_wsl_submenu() -> SystemTrayMenu {
-    let mut wsl_submenu = SystemTrayMenu::new();
-    
-    match list_wsl_distributions() {
-        Ok(distributions) => {
-            for dist in distributions {
-                let dist_name: String = dist.name.clone();
-                let dist_id: String = format!("id_{}", dist_name.clone());
-                println!("Name: {}", dist_name);
-                wsl_submenu = wsl_submenu.add_item(CustomMenuItem::new(dist_id, dist_name));
-            }
-        }
-        Err(err) => {
-            println!("Erro ao listar as distribuições do WSL: {}", err);
-        }
-    }
-    
-    wsl_submenu
 }

@@ -1,20 +1,26 @@
-use std::io;
-use std::process::Command;
-use std::sync::Arc;
-use futures::lock::Mutex;
+use tauri::{CustomMenuItem, SystemTrayMenu};
+use super::list::list_wsl_distributions;
 
-pub async fn open_distro(distro_name: &str) -> io::Result<()> {
-    println!("Comando a ser executado: wsl.exe -d {} --new-window", distro_name);
+pub fn create_wsl_submenu() -> SystemTrayMenu {
 
-    let output = Command::new("wsl.exe")
-        .args(&["-d", distro_name, "--new-window"])
-        .output()
-        .await?;
-
-    if output.status.success() {
-        println!("foi");
-        Ok(())
-    } else {
-        Err(io::Error::new(io::ErrorKind::Other, "Falha ao executar o comando WSL"))
+    fn clean_string(input: &str) -> String {
+        input.chars().filter(|&c| c.is_ascii_graphic() || c.is_whitespace()).collect()
     }
+
+    let mut wsl_submenu = SystemTrayMenu::new();
+    
+    match list_wsl_distributions() {
+        Ok(distributions) => {
+            for dist in distributions {
+                let dist_name: String = clean_string(&dist.name);
+                let dist_id: String = format!("id_{}", &dist_name);
+                wsl_submenu = wsl_submenu.add_item(CustomMenuItem::new(dist_id, dist_name));
+            }
+        }
+        Err(err) => {
+            println!("Erro ao listar as distribuições do WSL: {}", err);
+        }
+    }
+    
+    wsl_submenu
 }
