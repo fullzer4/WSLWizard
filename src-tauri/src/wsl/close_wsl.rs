@@ -14,3 +14,8 @@ pub fn close_wsl() -> io::Result<()> {
         Err(io::Error::new(io::ErrorKind::Other, "Falha ao executar o comando WSL"))
     }
 }
+
+#[tauri::command]
+pub fn cmd_close_wsl() {
+    let _ = close_wsl();
+}

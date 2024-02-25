@@ -1,8 +1,9 @@
 use std::io;
 use std::process::Command;
 use std::str;
+use serde::Serialize;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct WSLDistribution {
     pub name: String,
 }
@@ -36,4 +37,17 @@ pub fn list_wsl_distributions() -> io::Result<Vec<WSLDistribution>> {
         .collect();
     
     Ok(distributions)
+}
+
+#[derive(Debug, Serialize)] 
+pub struct WSLDistributionsResponse {
+    pub distros: Vec<WSLDistribution>,
+}
+
+#[tauri::command]
+pub fn cmd_list_wsl_distributions() -> Result<WSLDistributionsResponse, String> {
+    match list_wsl_distributions() {
+        Ok(distros) => Ok(WSLDistributionsResponse { distros }),
+        Err(err) => Err(format!("Error list wsls: {}", err)),
+    }
 }

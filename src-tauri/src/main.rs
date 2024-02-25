@@ -7,7 +7,8 @@ mod wsl;
 use crate::wsl::{
     distro_c::create_wsl_submenu,
     open::open_distro,
-    close_wsl::close_wsl,
+    close_wsl::{close_wsl, cmd_close_wsl},
+    list::cmd_list_wsl_distributions
 };
 
 fn main() {
@@ -31,6 +32,7 @@ fn main() {
         }
         _ => {}
         })
+        .invoke_handler(tauri::generate_handler![cmd_list_wsl_distributions, cmd_close_wsl])
         .system_tray(SystemTray::new().with_menu(tray_menu).with_id("tray"))
         
         .on_system_tray_event(|app, event| match event {
