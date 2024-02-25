@@ -44,10 +44,24 @@ pub struct WSLDistributionsResponse {
     pub distros: Vec<WSLDistribution>,
 }
 
+fn clean_string(input: &str) -> String {
+    input.chars().filter(|&c| c.is_ascii_graphic() || c.is_whitespace()).collect()
+}
+
 #[tauri::command]
 pub fn cmd_list_wsl_distributions() -> Result<WSLDistributionsResponse, String> {
     match list_wsl_distributions() {
-        Ok(distros) => Ok(WSLDistributionsResponse { distros }),
+        Ok(distros) => {
+            let cleaned_distros: Vec<WSLDistribution> = distros
+                .into_iter()
+                .map(|distro| {
+                    WSLDistribution {
+                        name: clean_string(&distro.name),
+                    }
+                })
+                .collect();
+            Ok(WSLDistributionsResponse { distros: cleaned_distros })
+        },
         Err(err) => Err(format!("Error list wsls: {}", err)),
     }
 }
