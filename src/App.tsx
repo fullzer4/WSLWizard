@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal, onCleanup } from "solid-js";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./scss/index.scss"
 import "./scss/screen.scss"
@@ -8,7 +8,11 @@ import Gear from "./components/gear";
 
 const App = () => {
 
-  const [distros, setDistros] = createSignal([]);
+  const [distros, setDistros] = createSignal<Array<any>>([]);
+  const [disk, setDisk] = createSignal<Array<any>>([]);
+  const [ram, setRam] = createSignal<Array<any>>([]);
+  const [cpu, setCpu] = createSignal<Array<any>>([]);
+  const [gpu, setGpu] = createSignal<Array<any>>([]);
 
   const getListWSLDistributions = () => {
     try {
@@ -20,6 +24,16 @@ const App = () => {
         console.error('Erro ao listar as distribuições WSL:', error);
     }
   }
+
+  createEffect(() => {
+    const intervalId = setInterval(() => {
+      
+    }, 1000);
+
+    onCleanup(() => {
+      clearInterval(intervalId);
+    });
+  })
 
   getListWSLDistributions()
 
@@ -34,18 +48,22 @@ const App = () => {
             </div>
             <Graph
               label="Disk%:"
+              signal={disk}
             />
           </div>
           <div>
             <div>
               <Graph
                 label="Cpu%:"
+                signal={cpu}
               />
               <Graph
                 label="Ram%:"
+                signal={ram}
               />
               <Graph
                 label="Gpu%:"
+                signal={gpu}
               />
             </div>
             <div>
