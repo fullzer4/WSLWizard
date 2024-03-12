@@ -6,13 +6,15 @@ import Graph from "./components/graph";
 import State from "./components/state";
 import Gear from "./components/gear";
 
+type TPercenteage = [number?, number?, number?, number?, number?, number?, number?, number?, number?, number?];
+
 const App = () => {
 
-  const [distros, setDistros] = createSignal<Array<any>>([]);
-  const [disk, setDisk] = createSignal<Array<any>>([]);
-  const [ram, setRam] = createSignal<Array<any>>([]);
-  const [cpu, setCpu] = createSignal<Array<any>>([]);
-  const [gpu, setGpu] = createSignal<Array<any>>([]);
+  const [distros, setDistros] = createSignal<Array<string>>([]);
+  const [disk, setDisk] = createSignal<Array<TPercenteage>>([]);
+  const [ram, setRam] = createSignal<Array<TPercenteage>>([]);
+  const [cpu, setCpu] = createSignal<Array<TPercenteage>>([]);
+  const [gpu, setGpu] = createSignal<Array<TPercenteage>>([]);
 
   const getListWSLDistributions = () => {
     try {
@@ -41,7 +43,7 @@ const App = () => {
     <div class="container">
       {distros().map((distro: any) => (
         <div class="distrobox">
-          <div>
+          <div class="box1">
             <div>
               <p>{distro.name}</p>
               <State state={false}/>
@@ -51,8 +53,8 @@ const App = () => {
               signal={disk}
             />
           </div>
-          <div>
-            <div>
+          <div class="box2">
+            <div class="graphs">
               <Graph
                 label="Cpu%:"
                 signal={cpu}
@@ -66,7 +68,7 @@ const App = () => {
                 signal={gpu}
               />
             </div>
-            <div>
+            <div class="buttons">
               <button>OPEN</button>
               <button>LOGS</button>
               <button>NETWORK</button>
